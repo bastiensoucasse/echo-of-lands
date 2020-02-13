@@ -55,7 +55,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -149,8 +149,12 @@ MonoBehaviour:
   m_LookSensivity: 6
   m_MoveSpeed: 6
   m_LookSensivityMultiplier: 100
-  m_MoveSpeedMultiplier: 2
+  m_MinSprintMultiplier: 0.5
+  m_InitialSprintMultiplier: 2
+  m_MaxSprintMultiplier: 4
   m_JumpHeight: 1
+  m_PlayerHeight: 1.8
+  m_CrouchedPlayerHeight: 1
   m_GroundMask:
     serializedVersion: 2
     m_Bits: 256
