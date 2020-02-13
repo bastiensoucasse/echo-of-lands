@@ -149,13 +149,12 @@ MonoBehaviour:
   m_LookSensivity: 6
   m_MoveSpeed: 6
   m_LookSensivityMultiplier: 100
-  m_MinSprintMultiplier: 0.5
-  m_InitialSprintMultiplier: 2
-  m_MaxSprintMultiplier: 4
+  m_MinMoveMultiplier: 0.5
+  m_InitialMoveMultiplier: 1.5
+  m_MaxMoveMultiplier: 2.5
   m_JumpHeight: 1
-  m_PlayerHeight: 1.8
-  m_CrouchedPlayerHeight: 1
+  m_FieldOfViewSpeed: 10
   m_GroundMask:
     serializedVersion: 2
     m_Bits: 256
-  m_GroundCheckDistance: 0.1
+  m_GroundCheckDistance: 0.4

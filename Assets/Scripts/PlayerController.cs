@@ -7,20 +7,20 @@ public class PlayerController : MonoBehaviour
     [Range(1, 10)] public float m_LookSensivity = 6F;
     [Range(1, 10)] public float m_MoveSpeed = 6F;
     public float m_LookSensivityMultiplier = 100F;
-    public float m_MinSprintMultiplier = 0.5F;
-    public float m_InitialSprintMultiplier = 2F;
-    public float m_MaxSprintMultiplier = 2F;
+    public float m_MinMoveMultiplier = 0.5F;
+    public float m_InitialMoveMultiplier = 1.5F;
+    public float m_MaxMoveMultiplier = 2.5F;
     public float m_JumpHeight = 1F;
     public float m_FieldOfViewSpeed = 10F;
     public LayerMask m_GroundMask;
-    public float m_GroundCheckDistance = 0.1F;
+    public float m_GroundCheckDistance = 0.4F;
 
     Camera m_Camera;
     CharacterController m_CharacterController;
     float m_XRotation, m_YRotation;
     Vector3 m_Move, m_Velocity;
     bool m_IsGrounded, m_IsSprinting, m_IsCrouched;
-    float m_FieldOfView, m_PlayerHeight, m_SprintMultiplier;
+    float m_FieldOfView, m_PlayerHeight, m_MoveMultiplier;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
         m_FieldOfView = m_Camera.fieldOfView;
         m_PlayerHeight = m_CharacterController.height;
-        m_SprintMultiplier = m_InitialSprintMultiplier;
+        m_MoveMultiplier = m_InitialMoveMultiplier;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckGroundStatus()
     {
+        // m_IsGrounded = m_CharacterController.isGrounded;
         m_IsGrounded = Physics.CheckSphere(transform.position, m_GroundCheckDistance, m_GroundMask);
     }
 
@@ -63,9 +64,9 @@ public class PlayerController : MonoBehaviour
 
         UpdateMoveMultiplier();
 
-        m_Move = (transform.right * Input.GetAxis("Move X") + transform.forward * Input.GetAxis("Move Y")) * m_SprintMultiplier;
+        m_Move = (transform.right * Input.GetAxis("Move X") + transform.forward * Input.GetAxis("Move Y")) * m_MoveMultiplier;
 
-        if (m_Velocity.y < 0F && m_IsGrounded) m_Velocity.y = 0F;
+        if (m_Velocity.y < 0F && m_IsGrounded) m_Velocity.y = -2F;
 
         UpdateJump();
 
@@ -96,22 +97,22 @@ public class PlayerController : MonoBehaviour
 
         if (m_IsCrouched)
         {
-            if (m_SprintMultiplier > m_MinSprintMultiplier) m_SprintMultiplier -= 0.05F;
-            if (m_SprintMultiplier < m_MinSprintMultiplier) m_SprintMultiplier = m_MinSprintMultiplier;
+            if (m_MoveMultiplier > m_MinMoveMultiplier) m_MoveMultiplier -= 0.05F;
+            if (m_MoveMultiplier < m_MinMoveMultiplier) m_MoveMultiplier = m_MinMoveMultiplier;
         }
         else if (m_IsSprinting)
         {
-            if (m_SprintMultiplier < m_MaxSprintMultiplier) m_SprintMultiplier += 0.01F;
-            if (m_SprintMultiplier > m_MaxSprintMultiplier) m_SprintMultiplier = m_MaxSprintMultiplier;
+            if (m_MoveMultiplier < m_MaxMoveMultiplier) m_MoveMultiplier += 0.01F;
+            if (m_MoveMultiplier > m_MaxMoveMultiplier) m_MoveMultiplier = m_MaxMoveMultiplier;
         }
         else
         {
-            if (m_SprintMultiplier < m_InitialSprintMultiplier) m_SprintMultiplier += 0.05F;
-            if (m_SprintMultiplier > m_InitialSprintMultiplier) m_SprintMultiplier -= 0.02F;
+            if (m_MoveMultiplier < m_InitialMoveMultiplier) m_MoveMultiplier += 0.05F;
+            if (m_MoveMultiplier > m_InitialMoveMultiplier) m_MoveMultiplier -= 0.02F;
 
-            if ((m_SprintMultiplier > m_InitialSprintMultiplier - 0.05F && m_SprintMultiplier < m_InitialSprintMultiplier) ||
-                    (m_SprintMultiplier < m_InitialSprintMultiplier + 0.05F && m_SprintMultiplier > m_InitialSprintMultiplier))
-                m_SprintMultiplier = m_InitialSprintMultiplier;
+            if ((m_MoveMultiplier > m_InitialMoveMultiplier - 0.05F && m_MoveMultiplier < m_InitialMoveMultiplier) ||
+                    (m_MoveMultiplier < m_InitialMoveMultiplier + 0.05F && m_MoveMultiplier > m_InitialMoveMultiplier))
+                m_MoveMultiplier = m_InitialMoveMultiplier;
         }
     }
 
