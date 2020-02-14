@@ -650,6 +650,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -663,10 +664,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 15f93c0e-0b7e-4ec8-928b-9afad602b864
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Echo of Lands
+  organizationId: bastienlouisclementsoucasse
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
